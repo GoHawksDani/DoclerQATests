@@ -1,0 +1,43 @@
+package com.pack.common.test;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import com.pack.common.pageobjects.GeneralObjects;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		features = "feature"
+		,glue={"stepDefinition"}
+		,monochrome = true
+		,dryRun = false
+		)
+
+public class TestRunner {
+ 
+	private static WebDriver driver;
+	
+	@BeforeClass
+	public static void setUp(){
+		System.setProperty("webdriver.gecko.driver", "lib\\geckodriver.exe");
+		driver =  new FirefoxDriver();		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		GeneralObjects.navigateToSite(driver, "http://uitest.duodecadits.com/");
+	} 
+
+	@AfterClass
+	public static void cleanUpAndTearDown(){
+		driver.manage().deleteAllCookies();
+		driver.close(); 
+	} 
+	
+	
+}

@@ -1,0 +1,10 @@
+package com.pack.common.modules;
+
+import org.openqa.selenium.WebDriver;
+
+public class CheckHomePageElements {
+
+	public static void Execute(WebDriver driver){
+		
+	}
+}

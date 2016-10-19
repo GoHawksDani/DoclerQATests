@@ -1,0 +1,32 @@
+package com.pack.common.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class FormPageObjects {
+
+	private static WebElement element = null;
+	
+	 public static WebElement formBtn(WebDriver driver){		 
+		    element = driver.findElement(By.id("form"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement formForm(WebDriver driver){		 
+		    element = driver.findElement(By.id("hello-form"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement formInput(WebDriver driver){		 
+		    element = driver.findElement(By.id("hello-input"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement formSubmitBtn(WebDriver driver){		 
+		    element = driver.findElement(By.id("hello-submit"));		 
+		    return element;		 
+	 }
+	 
+	 
+}

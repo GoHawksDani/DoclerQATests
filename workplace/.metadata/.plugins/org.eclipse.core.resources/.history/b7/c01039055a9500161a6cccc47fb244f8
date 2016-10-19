@@ -1,0 +1,44 @@
+Feature: I’d like to test the basic functions and check the elements on the Docler Holding QA Department site.
+
+	Scenario: Checking the navigation and basic elements of the site
+		Given I am on the http://uitest.duodecadits.com/ site	
+  		When I click on form button
+				Then I should arrive to the Form page	
+  				And the form button should turn to active status (highlighted)
+					And the company logo should be visible on the Form page
+					And the title should be: UI Testing Site
+			When I click on the logo
+  			Then I should arrive on the Home page
+  		When I click on the error button
+  			Then I should get a 404 HTTP response error code
+  		When I go back to Form Page and click on the home button
+  			Then I should arrive on the Home page
+  				And the home button should turn to active status (highlighted)
+					And the company logo should be visible on the Home page
+					And the title should be: UI Testing Site
+
+	Scenario: Checking the unique elements on the Home page
+		Given I am on the http://uitest.duodecadits.com/ site
+  			And I am on the Home page
+  		Then I should see “Welcome to the Docler Holding QA Department” text in a header tag (<h1>)
+      	And I should see “This site is dedicated to perform some exercises and demonstrate automated web testing” text in a paragraph (<p>) HTML tag.
+
+  Scenario: Checking the unique elements on the Form page
+    Given I am on the http://uitest.duodecadits.com/ site
+    		And I am on the Form page
+    	Then there should be a form with one input box and a submit button
+
+  Scenario Outline: Submitting the form on the Form page
+    Given I am on the http://uitest.duodecadits.com/ site
+    		And I am on the Form page
+    	When I type <value> to the input field
+      	And I click on the submit button
+     		Then I should get redirected to the Hello page
+      		And the following text should appear: <result>
+
+     Examples:
+	|  value   |     result       |
+	|  John    |  Hello John!     |
+	|  Sophia  |  Hello Sophia!   |
+	|  Charlie |  Hello Charlie!  |
+	|  Emily   |  Hello Emily!    |

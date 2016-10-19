@@ -1,0 +1,26 @@
+package com.pack.common.tests;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class DoclerUiTests {
+
+	private static WebDriver driver = null;
+	 
+	   public static void main(String[] args) {
+	 
+	     driver = new FirefoxDriver();
+	 
+	     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 
+	     driver.get("http://www.store.demoqa.com");
+   
+	
+
+}

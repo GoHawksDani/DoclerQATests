@@ -1,0 +1,37 @@
+package com.pack.common.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class GeneralObjects {
+	
+	private static WebElement element = null;
+	
+	 public static WebElement companyLogo(WebDriver driver){		 
+		    element = driver.findElement(By.id("dh_logo"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement testingLogo(WebDriver driver){		 
+		    element = driver.findElement(By.id("site"));		 
+		    return element;		 
+	 }
+	 
+	 public static String browserTitle(WebDriver driver){		 
+		    String browserTitle = driver.getTitle();		 
+		    return browserTitle;		 
+	 }
+	 
+	 public static String currentURL(WebDriver driver){		 
+		    String URL = driver.getCurrentUrl();		 
+		    return URL;		 
+	 }
+	 
+	 public static String currentActiveBtnId(WebDriver driver){		 
+		    WebElement activeLi = driver.findElement(By.xpath("//li[@class='active']"));		 
+		    String activeBtnId = activeLi.findElement(By.tagName("a")).getAttribute("id");
+		    return activeBtnId;
+	 }
+	
+}

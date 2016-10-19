@@ -1,0 +1,16 @@
+package com.pack.common.setuptest;
+
+import org.junit.runner.RunWith;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		features = "classpath:src/com.pack.common.test/DoclerTest.feature"
+		,glue={"com.pack.common.test"}
+		,monochrome = true
+		)
+
+public class TestRunner {
+ 
+}

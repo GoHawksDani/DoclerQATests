@@ -1,0 +1,17 @@
+package com.common.testsetup;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+
+public class SetupTest {
+
+	@BeforeClass
+	public static void setupTest() {
+		
+	}
+	
+	@AfterClass
+	public static void tearDownTest() {
+		
+	}
+}

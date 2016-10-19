@@ -1,0 +1,23 @@
+package com.pack.common.setuptest;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class SetupTest {
+
+	@BeforeClass
+	public static void setUp(WebDriver driver){
+		driver =  new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	} 
+
+	@AfterClass
+	public void cleanUpAndTearDown(WebDriver driver){
+		driver.manage().deleteAllCookies();
+		driver.close(); 
+	} 
+}

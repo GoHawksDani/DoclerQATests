@@ -1,0 +1,10 @@
+package com.pack.basic;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class TestSetup {
+
+	WebDriver driver = new FirefoxDriver();
+	driver.get("http://www.store.demoqa.com");
+}

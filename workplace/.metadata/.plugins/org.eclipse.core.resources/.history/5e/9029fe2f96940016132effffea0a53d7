@@ -1,0 +1,26 @@
+package com.pack.common.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class GeneralObjects {
+	
+	private static WebElement element = null;
+	
+	 public static WebElement companyLogo(WebDriver driver){		 
+		    element = driver.findElement(By.id("dh_logo"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement testingLogo(WebDriver driver){		 
+		    element = driver.findElement(By.id("site"));		 
+		    return element;		 
+	 }
+	 
+	 public static String browserTitle(WebDriver driver){		 
+		    String browserTitle = driver.getTitle();		 
+		    return browserTitle;		 
+	 }
+	
+}

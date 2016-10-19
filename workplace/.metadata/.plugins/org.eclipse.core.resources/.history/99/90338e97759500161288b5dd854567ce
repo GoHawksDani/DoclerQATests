@@ -1,0 +1,158 @@
+package stepDefinition;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import com.pack.common.pageobjects.ErrorPageObjects;
+import com.pack.common.pageobjects.FormPageObjects;
+import com.pack.common.pageobjects.GeneralObjects;
+import com.pack.common.pageobjects.HomePageObjects;
+
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class StepDefinition {
+
+	public static WebDriver driver;
+	
+	@After
+	public static void cleanUpAndTearDown(){
+		driver.manage().deleteAllCookies();
+		driver.close(); 
+	} 
+	
+	@Given("^I set up the testing environment$")
+	public void i_set_up_the_testing_environment() throws Throwable {
+		System.setProperty("webdriver.gecko.driver", "lib\\geckodriver.exe");
+		driver =  new FirefoxDriver();		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		GeneralObjects.navigateToSite(driver, "http://uitest.duodecadits.com/");
+	}
+	
+	@Given("^I am on the http://uitest\\.duodecadits\\.com/ site$")
+	public void i_am_on_the_http_uitest_duodecadits_com_site() throws Throwable {
+	    Assert.assertTrue(HomePageObjects.verifyHomeUrl(driver));
+	    HomePageObjects.waitUntilCompanyLogoAppears(driver);
+	}
+	
+	@When("^I click on form button$")
+	public void i_click_on_form_button() throws Throwable {
+		FormPageObjects.navigateToFormPage(driver);
+	}
+
+	@Then("^I should arrive to the Form page$")
+	public void i_should_arrive_to_the_Form_page() throws Throwable {
+		Assert.assertTrue(FormPageObjects.verifyFormPageUrl(driver));
+	}
+
+	@Then("^the form button should turn to active status \\(highlighted\\)$")
+	public void the_form_button_should_turn_to_active_status_highlighted() throws Throwable {
+		Assert.assertTrue(FormPageObjects.verifyFormBtnActive(driver));
+	}
+
+	@Then("^the company logo should be visible on the Form page$")
+	public void the_company_logo_should_be_visible_on_the_Form_page() throws Throwable {
+		GeneralObjects.companyLogo(driver);
+	}
+
+	@And("^the title should be: UI Testing Site$")
+	public void the_title_should_be_UI_Testing_Site() throws Throwable {
+		Assert.assertTrue(GeneralObjects.verifyBrowserTitle(driver));
+	}
+
+	@When("^I click on the logo$")
+	public void i_click_on_the_logo() throws Throwable {
+		HomePageObjects.navigateToHomePageWithTestingLogo(driver);
+	}
+
+	@Then("^I should arrive on the Home page$")
+	public void i_should_arrive_on_the_Home_page() throws Throwable {
+		Assert.assertTrue(HomePageObjects.verifyHomeUrl(driver));
+	}
+
+	@When("^I click on the error button$")
+	public void i_click_on_the_error_button() throws Throwable {
+		ErrorPageObjects.navigateToErrorPage(driver);
+	}
+
+	@Then("^I should get a 404 HTTP response error code$")
+	public void i_should_get_a_HTTP_response_error_code() throws Throwable {
+		Assert.assertTrue(ErrorPageObjects.verifyErrorUrl(driver));
+	     Assert.assertTrue(ErrorPageObjects.verifyErrorText(driver));
+	}
+
+	@When("^I go back and click on the home button$")
+	public void i_click_on_the_home_button() throws Throwable {
+		GeneralObjects.browserBack(driver);
+		driver.close();
+		driver.quit();
+		driver = new FirefoxDriver();
+		driver.get("http://uitest.duodecadits.com/");
+		HomePageObjects.waitUntilCompanyLogoAppears(driver);
+	    HomePageObjects.navigateToHomePageWithHomeBtn(driver);
+	}
+
+	@Then("^the home button should turn to active status \\(highlighted\\)$")
+	public void the_home_button_should_turn_to_active_status_highlighted() throws Throwable {
+		HomePageObjects.verifyHomeBtnActive(driver);
+	}
+
+	@Then("^the company logo should be visible on the Home page$")
+	public void the_company_logo_should_be_visible_on_the_Home_page() throws Throwable {
+		GeneralObjects.companyLogo(driver);
+	    HomePageObjects.verifyHomeUrl(driver);
+	}
+
+	@Given("^I am on the Home page$")
+	public void i_am_on_the_Home_page() throws Throwable {
+		HomePageObjects.verifyHomeUrl(driver);
+	}
+
+	@Then("^I should see Welcome to the Docler Holding QA Department text in a header tag$")
+	public void i_should_see_Welcome_to_the_Docler_Holding_QA_Department_text_in_a_header_tag_h() throws Throwable {
+		Assert.assertTrue(HomePageObjects.verifyHomeHeaderText(driver));
+	}
+
+	@Then("^I should see This site is dedicated to perform some exercises and demonstrate automated web testing text in a paragraph HTML tag$")
+	public void i_should_see_This_site_is_dedicated_to_perform_some_exercises_and_demonstrate_automated_web_testing_text_in_a_paragraph_p_HTML_tag() throws Throwable {
+		Assert.assertTrue(HomePageObjects.verifyHomeParagraphText(driver));
+	}
+
+	@Given("^I am on the Form page$")
+	public void i_am_on_the_Form_page() throws Throwable {
+		FormPageObjects.navigateToFormPage(driver); 
+	}
+
+	@Then("^there should be a form with one input box and a submit button$")
+	public void there_should_be_a_form_with_one_input_box_and_a_submit_button() throws Throwable {
+		Assert.assertTrue(FormPageObjects.checkFormPageFormInputSubmit(driver));
+	}
+
+	@When("^I type \"(.*)\" to the input field$")
+	public void i_type_John_to_the_input_field(String username) throws Throwable {
+		FormPageObjects.formInput(driver).sendKeys(username);
+	}
+
+	@When("^I click on the submit button$")
+	public void i_click_on_the_submit_button() throws Throwable {
+		FormPageObjects.formBtn(driver).submit();
+	}
+
+	@Then("^I should get redirected to the Hello page$")
+	public void i_should_get_redirected_to_the_Hello_page() throws Throwable {
+	    FormPageObjects.waitUntilHelloTextAppears(driver);
+	    Assert.assertTrue(FormPageObjects.verifyHelloPage(driver));
+	}
+
+	@And("^the following text should appear \"(.*)\"$")
+	public void the_following_text_should_appear_Hello_John(String result) throws Throwable {
+		Assert.assertEquals(FormPageObjects.helloText(driver).getText(), result);
+	}
+
+}

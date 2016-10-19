@@ -1,0 +1,58 @@
+package com.pack.common.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class FormPageObjects {
+
+	private static WebElement element = null;
+	
+	 public static WebElement formBtn(WebDriver driver){		 
+		    element = driver.findElement(By.id("form"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement formForm(WebDriver driver){		 
+		    element = driver.findElement(By.id("hello-form"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement formInput(WebDriver driver){		 
+		    element = driver.findElement(By.id("hello-input"));		 
+		    return element;		 
+	 }
+	 
+	 public static WebElement formSubmitBtn(WebDriver driver){		 
+		    element = driver.findElement(By.id("hello-submit"));		 
+		    return element;		 
+	 }
+	 
+	 public static void waitUntilInputAppears(WebDriver driver){
+		 WebDriverWait wait = new WebDriverWait(driver, 15);
+		 wait.until(ExpectedConditions.visibilityOfElementLocated((By) formInput(driver)));		 
+	 }
+	 
+	 public static boolean verifyFormPageUrl(WebDriver driver) {
+			String currentURL = driver.getCurrentUrl();
+			String formPageURL ="http://uitest.duodecadits.com/form.html";
+			return formPageURL == currentURL;
+	 }
+	 
+	 public static boolean verifyFormBtnActive(WebDriver driver) {
+			return GeneralObjects.currentActiveBtnId(driver) == "form";
+	 }
+	 
+	 public static void navigateToFormPage(WebDriver driver){
+	     if (!verifyFormPageUrl(driver)){
+	    	 formBtn(driver).click();
+	    	 waitUntilInputAppears(driver);
+	     } else {
+	    	 waitUntilInputAppears(driver); 
+	     }
+	     }
+	 }
+	 
+}
